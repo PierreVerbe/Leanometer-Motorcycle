@@ -27,10 +27,10 @@ void loop()
 
   //Converted the data in degrees
   Serial.print("AcX : ");
-  Serial.println(AcX/128);
+  Serial.println(AcX / 128);
   Serial.print("AcY : ");
-  Serial.println(AcY/128);
+  Serial.println(AcY / 128);
   Serial.print("AcZ : ");
-  Serial.println(AcZ/128);
+  Serial.println(AcZ / 128);
   delay(500);
 }
