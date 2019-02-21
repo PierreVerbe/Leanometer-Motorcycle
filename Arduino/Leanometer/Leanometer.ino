@@ -14,28 +14,31 @@ const int OLED = 0x3C; // I2C address of the OLED
 
 int16_t AcX, AcY, AcZ, Tmp, GyX, GyY, GyZ;
 
+int16_t compteur = 90;
+
 void setup()
 {
   Serial.begin(9600);
   Wire.begin();
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
   display.display();
-  delay(2000); // Pause for 2 seconds
+  delay(500); // Pause for 0.5 seconde
+  display.clearDisplay();// Clear the buffer
 
-  // Clear the buffer
-  display.clearDisplay();
-
-  display.setTextSize(1);             // Normal 1:1 pixel scale
+  display.setTextSize(2);             // Normal 1:1 pixel scale
   display.setTextColor(WHITE);        // Draw white text
   display.setCursor(0, 0);            // Start at top-left corner
-  display.println(F("BoNjOuR"));
+  display.println(F("Leanometre"));
+  display.setTextSize(1);
+  display.println(F("from Pierre Verbe"));
+  display.println(compteur);
   display.display();      // Show initial text
-  delay(2000);
+  delay(500);
 
-  Wire.endTransmission(OLED);
+  //Wire.endTransmission(OLED);
 
   // initialisation des fonctions
-  testdrawstyles();
+  //testdrawstyles();
 
   //Wire.beginTransmission(MPU);
   //Wire.write(0x6B);  // PWR_MGMT_1 register
@@ -45,32 +48,70 @@ void setup()
 
 void loop()
 {
-  Wire.beginTransmission(MPU);
-  Wire.write(0x3B);  // starting with register 0x3B (ACCEL_XOUT_H)
-  Wire.endTransmission(false);
-  Wire.requestFrom(MPU, 14, true); // request a total of 14 registers
-  AcX = Wire.read() << 8 | Wire.read(); // 0x3B (ACCEL_XOUT_H) & 0x3C (ACCEL_XOUT_L)
-  AcY = Wire.read() << 8 | Wire.read(); // 0x3D (ACCEL_YOUT_H) & 0x3E (ACCEL_YOUT_L)
-  AcZ = Wire.read() << 8 | Wire.read(); // 0x3F (ACCEL_ZOUT_H) & 0x40 (ACCEL_ZOUT_L)
-  GyX = Wire.read() << 8 | Wire.read(); // 0x43 (GYRO_XOUT_H) & 0x44 (GYRO_XOUT_L)
-  GyY = Wire.read() << 8 | Wire.read(); // 0x45 (GYRO_YOUT_H) & 0x46 (GYRO_YOUT_L)
-  GyZ = Wire.read() << 8 | Wire.read(); // 0x47 (GYRO_ZOUT_H) & 0x48 (GYRO_ZOUT_L)
+  /*Wire.beginTransmission(MPU);
+    Wire.write(0x3B);  // starting with register 0x3B (ACCEL_XOUT_H)
+    Wire.endTransmission(false);
+    Wire.requestFrom(MPU, 14, true); // request a total of 14 registers
+    AcX = Wire.read() << 8 | Wire.read(); // 0x3B (ACCEL_XOUT_H) & 0x3C (ACCEL_XOUT_L)
+    AcY = Wire.read() << 8 | Wire.read(); // 0x3D (ACCEL_YOUT_H) & 0x3E (ACCEL_YOUT_L)
+    AcZ = Wire.read() << 8 | Wire.read(); // 0x3F (ACCEL_ZOUT_H) & 0x40 (ACCEL_ZOUT_L)
+    GyX = Wire.read() << 8 | Wire.read(); // 0x43 (GYRO_XOUT_H) & 0x44 (GYRO_XOUT_L)
+    GyY = Wire.read() << 8 | Wire.read(); // 0x45 (GYRO_YOUT_H) & 0x46 (GYRO_YOUT_L)
+    GyZ = Wire.read() << 8 | Wire.read(); // 0x47 (GYRO_ZOUT_H) & 0x48 (GYRO_ZOUT_L)
 
-  Serial.print("AcX = ");
-  Serial.println(AcX / 180);
-  Serial.print("AcY = ");
-  Serial.println(AcY / 180);
-  Serial.print("AcZ = ");
-  Serial.println(AcZ / 180);
+    Serial.print("AcX = ");
+    Serial.println(AcX / 180);
+    Serial.print("AcY = ");
+    Serial.println(AcY / 180);
+    Serial.print("AcZ = ");
+    Serial.println(AcZ / 180);
 
-  /*Serial.print("GyX = ");
+    /*Serial.print("GyX = ");
     Serial.println(GyX);
     Serial.print("GyY = ");
     Serial.println(GyY);
     Serial.print("GyZ = ");
     Serial.println(GyZ);*/
-  Serial.println();
-  Serial.println();
+  /*Serial.println();
+    Serial.println();*/
+
+
+
+  /*compteur++;
+    if (compteur == 255)compteur = 0;
+
+    display.clearDisplay();
+    display.setTextSize(1);             // Normal 1:1 pixel scale
+    display.setTextColor(WHITE);        // Draw white text
+    display.setCursor(0, 0);            // Start at top-left corner
+    if (compteur == 1)
+    {
+    display.println(F("ma première ligne"));
+    display.println(F("ma deux ligne"));
+    }
+
+    if (compteur == 2)
+    {
+    display.println(F(";)"));
+    }*/
+
+  //display.println(compteur);
+  display.display();
+
+  Serial.println(compteur);
+
+  while (compteur > 0) {
+    printAngleOLED(compteur);
+    display.display();
+    delay(200);
+    compteur--;
+  }
+  while (compteur < 90) {
+    printAngleOLED(compteur);
+    display.display();
+    delay(200);
+    compteur++;
+  }
 
   /*lcd.begin(16, 2);
     lcd.setCursor(1,1);
@@ -78,7 +119,7 @@ void loop()
     lcd.setCursor(1,0);
     lcd.print(GyX);*/
 
-  delay(1000);
+  delay(2000);
 
 }
 
@@ -87,7 +128,7 @@ void testdrawstyles(void) {
 
   display.setTextSize(1);             // Normal 1:1 pixel scale
   display.setTextColor(WHITE);        // Draw white text
-  display.setCursor(0, 0);            // Start at top-left corner
+  display.setCursor(0, 0);           // Start at top-left corner
   display.println(F("Hello, world!"));
 
   display.setTextColor(BLACK, WHITE); // Draw 'inverse' text
@@ -100,3 +141,18 @@ void testdrawstyles(void) {
   display.display();
   delay(2000);
 }
+
+// function to print on the OLED the actual angle
+void printAngleOLED(int16_t angle) {
+  display.clearDisplay();
+  display.setTextSize(9);
+  display.setTextColor(WHITE);
+  display.setCursor(15, 0);
+  display.println(angle);
+}
+
+void stats(int16_t angle) {
+
+}
+
+
