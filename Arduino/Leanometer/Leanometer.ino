@@ -22,9 +22,9 @@ void setup()
   Serial.println(" _                                           _              ");
   Serial.println("| |                                         | |             ");
   Serial.println("| |     ___  __ _ _ __   ___  _ __ ___   ___| |_ ___ _ ___  ");
-  Serial.println("| |    / _ \/ _` | '_ \ / _ \| '_ ` _ \ / _ \ __/ _ \ '__ | ");
+  Serial.println("| |    / _ \\/ _` | '_ \\ / _ \\| '_ ` _ \\ / _ \\ __/ _ \\ '__ | ");
   Serial.println("| |___|  __/ (_| | | | | (_) | | | | | |  __/ ||  __/ |     ");
-  Serial.println("|______\___|\__,_|_| |_|\___/|_| |_| |_|\___|\__\___|_|     ");
+  Serial.println("|______\\___|\\__,_|_| |_|\\___/|_| |_| |_|\\___|\\__\\___|_|     ");
 
   Wire.begin();
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
@@ -101,13 +101,9 @@ void loop()
     {
     display.println(F(";)"));
     }*/
-
-  //display.println(compteur);
-  display.display();
-
   Serial.println(compteur);
 
-  while (compteur > 0) {
+  /*while (compteur > 0) {
     printAngleOLED(compteur);
     display.display();
     delay(200);
@@ -118,16 +114,18 @@ void loop()
     display.display();
     delay(200);
     compteur++;
-  }
+  }*/
+
+
+  printInfo();
 
   /*lcd.begin(16, 2);
     lcd.setCursor(1,1);
     lcd.print(AcX);
     lcd.setCursor(1,0);
     lcd.print(GyX);*/
-
+  display.display();
   delay(2000);
-
 }
 
 void testdrawstyles(void) {
@@ -215,15 +213,15 @@ void printGyro(int16_t AcX, int16_t AcY, int16_t AcZ) {
   display.println(AcZ);
 }
 
-// function to print all the axis of the MP6050
+// function to print info about the angles
 void printInfo(void) {
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(0, 0);
-  display.println("Scooter -> 40°");
-  display.println("Street Bike -> 50°");
-  display.println("Super sport -> 55°");
-  display.println("SBK -> 61°");
-  display.println("MotoGP -> 64°");
+  display.println(F("Scooter -> 40 deg"));
+  display.println(F("Street Bike -> 50 deg"));
+  display.println(F("Super sport -> 55 deg"));
+  display.println(F("SBK -> 61 deg"));
+  display.println(F("MotoGP -> 64 deg"));
 }
