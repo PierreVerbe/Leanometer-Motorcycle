@@ -151,8 +151,20 @@ void printAngleOLED(int16_t angle) {
   display.println(angle);
 }
 
-void stats(int16_t angle) {
+// function to print stats on the OLED
+void statsLeanometre(int16_t angle) {
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(WHITE);
+  display.setCursor(0, 0);
+  display.print("MAX ANGLE : ");
+  display.println(angle);
+  display.print("TIME TRAVEL : ");
+  display.println();
+}
 
+void ledIndication(int16_t angle){
+  
 }
 
 
