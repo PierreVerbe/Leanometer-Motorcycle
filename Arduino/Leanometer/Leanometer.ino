@@ -19,6 +19,13 @@ int16_t compteur = 90;
 void setup()
 {
   Serial.begin(9600);
+  Serial.println(" _                                           _              ");
+  Serial.println("| |                                         | |             ");
+  Serial.println("| |     ___  __ _ _ __   ___  _ __ ___   ___| |_ ___ _ ___  ");
+  Serial.println("| |    / _ \/ _` | '_ \ / _ \| '_ ` _ \ / _ \ __/ _ \ '__ | ");
+  Serial.println("| |___|  __/ (_| | | | | (_) | | | | | |  __/ ||  __/ |     ");
+  Serial.println("|______\___|\__,_|_| |_|\___/|_| |_| |_|\___|\__\___|_|     ");
+
   Wire.begin();
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
   display.display();
@@ -46,54 +53,54 @@ void setup()
   //Wire.endTransmission(true);
 }
 
-void loop()
-{
+  void loop()
+  {
   /*Wire.beginTransmission(MPU);
-    Wire.write(0x3B);  // starting with register 0x3B (ACCEL_XOUT_H)
-    Wire.endTransmission(false);
-    Wire.requestFrom(MPU, 14, true); // request a total of 14 registers
-    AcX = Wire.read() << 8 | Wire.read(); // 0x3B (ACCEL_XOUT_H) & 0x3C (ACCEL_XOUT_L)
-    AcY = Wire.read() << 8 | Wire.read(); // 0x3D (ACCEL_YOUT_H) & 0x3E (ACCEL_YOUT_L)
-    AcZ = Wire.read() << 8 | Wire.read(); // 0x3F (ACCEL_ZOUT_H) & 0x40 (ACCEL_ZOUT_L)
-    GyX = Wire.read() << 8 | Wire.read(); // 0x43 (GYRO_XOUT_H) & 0x44 (GYRO_XOUT_L)
-    GyY = Wire.read() << 8 | Wire.read(); // 0x45 (GYRO_YOUT_H) & 0x46 (GYRO_YOUT_L)
-    GyZ = Wire.read() << 8 | Wire.read(); // 0x47 (GYRO_ZOUT_H) & 0x48 (GYRO_ZOUT_L)
+  Wire.write(0x3B);  // starting with register 0x3B (ACCEL_XOUT_H)
+  Wire.endTransmission(false);
+  Wire.requestFrom(MPU, 14, true); // request a total of 14 registers
+  AcX = Wire.read() << 8 | Wire.read(); // 0x3B (ACCEL_XOUT_H) & 0x3C (ACCEL_XOUT_L)
+  AcY = Wire.read() << 8 | Wire.read(); // 0x3D (ACCEL_YOUT_H) & 0x3E (ACCEL_YOUT_L)
+  AcZ = Wire.read() << 8 | Wire.read(); // 0x3F (ACCEL_ZOUT_H) & 0x40 (ACCEL_ZOUT_L)
+  GyX = Wire.read() << 8 | Wire.read(); // 0x43 (GYRO_XOUT_H) & 0x44 (GYRO_XOUT_L)
+  GyY = Wire.read() << 8 | Wire.read(); // 0x45 (GYRO_YOUT_H) & 0x46 (GYRO_YOUT_L)
+  GyZ = Wire.read() << 8 | Wire.read(); // 0x47 (GYRO_ZOUT_H) & 0x48 (GYRO_ZOUT_L)
 
-    Serial.print("AcX = ");
-    Serial.println(AcX / 180);
-    Serial.print("AcY = ");
-    Serial.println(AcY / 180);
-    Serial.print("AcZ = ");
-    Serial.println(AcZ / 180);
+  Serial.print("AcX = ");
+  Serial.println(AcX / 180);
+  Serial.print("AcY = ");
+  Serial.println(AcY / 180);
+  Serial.print("AcZ = ");
+  Serial.println(AcZ / 180);
 
-    /*Serial.print("GyX = ");
-    Serial.println(GyX);
-    Serial.print("GyY = ");
-    Serial.println(GyY);
-    Serial.print("GyZ = ");
-    Serial.println(GyZ);*/
+  /*Serial.print("GyX = ");
+  Serial.println(GyX);
+  Serial.print("GyY = ");
+  Serial.println(GyY);
+  Serial.print("GyZ = ");
+  Serial.println(GyZ);*/
   /*Serial.println();
-    Serial.println();*/
+  Serial.println();*/
 
 
 
   /*compteur++;
-    if (compteur == 255)compteur = 0;
+  if (compteur == 255)compteur = 0;
 
-    display.clearDisplay();
-    display.setTextSize(1);             // Normal 1:1 pixel scale
-    display.setTextColor(WHITE);        // Draw white text
-    display.setCursor(0, 0);            // Start at top-left corner
-    if (compteur == 1)
-    {
-    display.println(F("ma première ligne"));
-    display.println(F("ma deux ligne"));
-    }
+  display.clearDisplay();
+  display.setTextSize(1);             // Normal 1:1 pixel scale
+  display.setTextColor(WHITE);        // Draw white text
+  display.setCursor(0, 0);            // Start at top-left corner
+  if (compteur == 1)
+  {
+  display.println(F("ma première ligne"));
+  display.println(F("ma deux ligne"));
+}
 
-    if (compteur == 2)
-    {
-    display.println(F(";)"));
-    }*/
+  if (compteur == 2)
+  {
+  display.println(F(";)"));
+}*/
 
   //display.println(compteur);
   display.display();
@@ -101,29 +108,29 @@ void loop()
   Serial.println(compteur);
 
   while (compteur > 0) {
-    printAngleOLED(compteur);
-    display.display();
-    delay(200);
-    compteur--;
-  }
+  printAngleOLED(compteur);
+  display.display();
+  delay(200);
+  compteur--;
+}
   while (compteur < 90) {
-    printAngleOLED(compteur);
-    display.display();
-    delay(200);
-    compteur++;
-  }
+  printAngleOLED(compteur);
+  display.display();
+  delay(200);
+  compteur++;
+}
 
   /*lcd.begin(16, 2);
-    lcd.setCursor(1,1);
-    lcd.print(AcX);
-    lcd.setCursor(1,0);
-    lcd.print(GyX);*/
+  lcd.setCursor(1,1);
+  lcd.print(AcX);
+  lcd.setCursor(1,0);
+  lcd.print(GyX);*/
 
   delay(2000);
 
 }
 
-void testdrawstyles(void) {
+  void testdrawstyles(void) {
   display.clearDisplay();
 
   display.setTextSize(1);             // Normal 1:1 pixel scale
@@ -142,8 +149,8 @@ void testdrawstyles(void) {
   delay(2000);
 }
 
-// function to print on the OLED the actual angle
-void printAngleOLED(int16_t angle) {
+  // function to print on the OLED the actual angle
+  void printAngleOLED(int16_t angle) {
   display.clearDisplay();
   display.setTextSize(9);
   display.setTextColor(WHITE);
@@ -151,8 +158,8 @@ void printAngleOLED(int16_t angle) {
   display.println(angle);
 }
 
-// function to print stats on the OLED
-void statsLeanometre(int16_t angle_r, int16_t angle_l) {
+  // function to print stats on the OLED
+  void statsLeanometre(int16_t angle_r, int16_t angle_l) {
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(WHITE);
@@ -165,36 +172,36 @@ void statsLeanometre(int16_t angle_r, int16_t angle_l) {
   display.println();
 }
 
-// function use leds
-void ledIndication(int16_t angle) {
+  // function use leds
+  void ledIndication(int16_t angle) {
   // middle green
   if (angle >= -10 && angle <= 10) {
 
-  }
+}
 
   // soft right yellow
   else if (angle > 10 && angle <= 45) {
 
-  }
+}
 
   // hard right red
   else if (angle > 45) {
 
-  }
+}
 
   // soft left yellow
   else if (angle < -10 && angle >= -45) {
 
-  }
+}
 
   // hard left red
   else if (angle < -45) {
 
-  }
+}
 }
 
-// function to print all the axis of the MP6050
-void printGyro(int16_t AcX, int16_t AcY, int16_t AcZ) {
+  // function to print all the axis of the MP6050
+  void printGyro(int16_t AcX, int16_t AcY, int16_t AcZ) {
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(WHITE);
@@ -206,4 +213,17 @@ void printGyro(int16_t AcX, int16_t AcY, int16_t AcZ) {
   display.println(AcY);
   display.print("AcZ = ");
   display.println(AcZ);
+}
+
+  // function to print all the axis of the MP6050
+  void printInfo(void) {
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(WHITE);
+  display.setCursor(0, 0);
+  display.println("Scooter -> 40°");
+  display.println("Street Bike -> 50°");
+  display.println("Super sport -> 55°");
+  display.println("SBK -> 61°");
+  display.println("MotoGP -> 64°");
 }
