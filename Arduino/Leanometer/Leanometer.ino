@@ -163,8 +163,21 @@ void statsLeanometre(int16_t angle) {
   display.println();
 }
 
-void ledIndication(int16_t angle){
-  
+// function to print all the axis of the MP6050
+void ledIndication(int16_t angle) {
 }
 
 
+void printGyro(int16_t AcX, int16_t AcY, int16_t AcZ) {
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(WHITE);
+  display.setCursor(0, 0);
+  display.println("GYRO MPU6050");
+  display.print("AcX = ");
+  display.println(AcX);
+  display.print("AcY = ");
+  display.println(AcY);
+  display.print("AcZ = ");
+  display.println(AcZ);
+}
