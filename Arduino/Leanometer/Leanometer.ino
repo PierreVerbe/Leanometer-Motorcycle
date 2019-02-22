@@ -152,22 +152,48 @@ void printAngleOLED(int16_t angle) {
 }
 
 // function to print stats on the OLED
-void statsLeanometre(int16_t angle) {
+void statsLeanometre(int16_t angle_r, int16_t angle_l) {
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(0, 0);
-  display.print("MAX ANGLE : ");
-  display.println(angle);
+  display.print("MAX ANGLE R: ");
+  display.println(angle_r);
+  display.print("MAX ANGLE L: ");
+  display.println(angle_l);
   display.print("TIME TRAVEL : ");
   display.println();
 }
 
-// function to print all the axis of the MP6050
+// function use leds
 void ledIndication(int16_t angle) {
+  // middle green
+  if (angle >= -10 && angle <= 10) {
+
+  }
+
+  // soft right yellow
+  else if (angle > 10 && angle <= 45) {
+
+  }
+
+  // hard right red
+  else if (angle > 45) {
+
+  }
+
+  // soft left yellow
+  else if (angle < -10 && angle >= -45) {
+
+  }
+
+  // hard left red
+  else if (angle < -45) {
+
+  }
 }
 
-
+// function to print all the axis of the MP6050
 void printGyro(int16_t AcX, int16_t AcY, int16_t AcZ) {
   display.clearDisplay();
   display.setTextSize(1);
