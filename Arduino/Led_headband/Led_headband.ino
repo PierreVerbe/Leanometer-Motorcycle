@@ -2,7 +2,7 @@ const int lRed = 9;
 const int lOrange = 8;
 const int green = 7;
 const int rOrange = 6;
-const int rRed = 4;
+const int rRed = 5;
 
 void setup(){
   pinMode(lRed, OUTPUT);
