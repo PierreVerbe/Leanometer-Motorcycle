@@ -13,6 +13,7 @@ I2C
 ## Cabling on the μC
 
 ## Libraries 
-
-
-
+For this project we need 3 libraries :
+	- Wire
+	- Adafruit_GFX
+	- Adafruit_SSD1306
